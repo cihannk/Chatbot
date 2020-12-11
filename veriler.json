@@ -1,0 +1,32 @@
+{"veriler" :  [
+  {"tag":  "selamlama",
+  "patterns" :  ["Merhaba", "Nasılsın", "Ne yapıyorsun", "Selam", "Sa", "Selamun Aleyküm"],
+    "responses" : ["İyiyim", "sen nasılsın?","İyi, seni sormalı","As", "Aleyküm Selam"],
+    "context_set" : ""
+  },
+  {"tag":  "veda",
+  "patterns" :  ["Görüşürüz", "Hoşça Kal", "İyi günler", "Ben kapatıyorum", "Ayrılıyorum", "Sağlıcakla"],
+    "responses" : ["Görüşürüz!", "Sen de hoşça kal","Bir daha görüşmek üzere"],
+    "context_set" : ""
+  },
+  {"tag":  "yas",
+  "patterns" :  ["Kaç yaşındasın", "Yaş kaç", "Ne kadar zamandır yaşıyorsun", "Yaş?"],
+    "responses" : ["Henüz 1 yaşındayım","Şuan 1 yaşındayım","1"],
+    "context_set" : ""
+  },
+  {"tag":  "isim",
+  "patterns" :  ["İsmin ne", "Adın ne", "Sana ne diye hitap etmeliyim", "İsim?", "Kimle konuşuyorum"],
+    "responses" : ["Benim adım CBot", "Bana CBot diyebilirsin","CBot", "CBot burada!"],
+    "context_set" : ""
+  },
+  {"tag":  "yer",
+  "patterns" :  ["Nerede yaşıyorsun", "Neredesin?", "Yaşadığın yer neresi"],
+    "responses" : ["Ram'inin içinde", "Beni çalıştırdığın sürece senin bilgisayarında","Bilgisayarında"],
+    "context_set" : ""
+  },
+  {"tag":  "ozellikler",
+  "patterns" :  ["Özelliklerin neler", "Ne işe yarıyorsun", "Neden seni çalıştırmalıyım"],
+    "responses" : ["Saati söyleyebilirim, Finans marketlerini söyleyebilirim, Müzik çaldırabilirim"],
+    "context_set" : ""
+  }
+]}
