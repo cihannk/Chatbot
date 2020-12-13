@@ -6,6 +6,7 @@ model = load_model("chatbot_model.h5")
 import json
 import numpy
 import random
+import time
 import pickle
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -60,6 +61,12 @@ def chatbot_response(msg):
 
 while True:
     kl = input("Kullanıcı: ")
+    if kl.split()[0] == "play":
+        print("Çalışıyor")
+    elif kl == "quit":
+        print("Bot: Seninle konuşmak güzeldi...")
+        time.sleep(1.5)
+        break
     cb = chatbot_response(kl)
     print("Bot: ",cb)
 

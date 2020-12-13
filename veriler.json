@@ -28,5 +28,16 @@
   "patterns" :  ["Özelliklerin neler", "Ne işe yarıyorsun", "Neden seni çalıştırmalıyım"],
     "responses" : ["Saati söyleyebilirim, Finans marketlerini söyleyebilirim, Müzik çaldırabilirim"],
     "context_set" : ""
+  },
+  {"tag":  "muzik",
+    "patterns" :  ["Müzik çaldırabilir misin", "Şarkı çaldırabilir misin", "Çaldırmak", "Oynat"],
+      "responses" : ["Eğer müzik çaldırmamı istiyorsan: play {müzikismi} yaz"],
+      "context_set" : ""
+  },
+  {"tag":  "saat",
+    "patterns" :  ["Bugün günlerden ne", "Hangi Aydayız", "Hangi Yıldayız", "Saat kaç", "Şuan Saat kaç", "Tarih nedir", "Saati söyleyebilir misin", "Yılı söyleyebilir misin", "Ayı söyleyebilir misin"],
+      "responses" : ["Bugün günlerden","Ay: ","Yıl: ","Saat: ","Tarihi inceliyorum..."],
+      "context_set" : ""
   }
+
 ]}

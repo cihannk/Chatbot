@@ -5,13 +5,15 @@ import os
 import requests
 from bs4 import BeautifulSoup
 from playsound import playsound
-import multiprocessing
+from threading import Thread
+import time
+import sys
+from youtubesearchpython import SearchVideos
+import json
+
 downloaded = 0
 state = []
-
-def get_file_names(path=r"C:/Users/Cihan\Documents/GitHub/Chatbot/"):
-    names = os.listdir(path)
-    return names
+jobs= []
 
 
 
@@ -27,14 +29,6 @@ def getTime(type):
     elif type == "day":
         return timenow.strftime("%A")
 
-def save_folder_state():
-    state = get_file_names()
-
-def get_diff(recent_state):
-    now = get_file_names()
-    for i in now:
-        if i not in state:
-            return i
 
 def api_req(id="qTsaS1Tm-Ic"):
     a = requests.get(f"https://www.yt-download.org/api/button/mp3/{id}")
@@ -51,19 +45,36 @@ def download(link, mp3_name):
     doc = requests.get(link)
     with open(f'{mp3_name}.mp3', 'wb') as f:
         f.write(doc.content)
-def play(path="myfile.mp3"):
+
+def download_via_id(id, name):
+    content = api_req(id)
+    downlink = scraping(content)
+    download(downlink, name)
+
+def playmusic(path):
+    print("a")
     playsound(path, True)
 
-def playmulti():
-    p = multiprocessing.Process(target=play())
-    p.start()
-    p.terminate()
+def threading(path):
+    return Thread(target=playmusic, args=(path,), name="t")
 
-def stop(p):
-    p.stop()
-    p.te
-playmulti()
+def searchid(word):
+    search = SearchVideos(word, offset = 1, mode = "json", max_results = 1)
+    raw = search.result()
+    link = json.loads(raw)["search_result"][0]["link"]
+    print(link)
+    link = link[32:]
+    return link
+    
 
+'''
+a = threading("muzik.mp3")
+a.daemon = True
+a.start()
+print("hop")
+time.sleep(6)
+a._stop '''
 
+searchid("Enes batur yutup")
 
 
