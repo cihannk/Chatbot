@@ -1,11 +1,11 @@
 {"veriler" :  [
   {"tag":  "selamlama",
-  "patterns" :  ["Merhaba", "Nasılsın", "Ne yapıyorsun", "Selam", "Sa", "Selamun Aleyküm"],
+  "patterns" :  ["Merhaba", "Nasılsın", "Ne yapıyorsun", "Selam", "Sa", "Selamun Aleyküm","Naber"],
     "responses" : ["İyiyim", "sen nasılsın?","İyi, seni sormalı","As", "Aleyküm Selam"],
     "context_set" : ""
   },
   {"tag":  "veda",
-  "patterns" :  ["Görüşürüz", "Hoşça Kal", "İyi günler", "Ben kapatıyorum", "Ayrılıyorum", "Sağlıcakla"],
+  "patterns" :  ["Görüşürüz", "Hoşça Kal", "İyi günler", "Kapatıyorum", "Ayrılıyorum", "Sağlıcakla"],
     "responses" : ["Görüşürüz!", "Sen de hoşça kal","Bir daha görüşmek üzere"],
     "context_set" : ""
   },
