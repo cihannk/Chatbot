@@ -4,17 +4,16 @@ import datetime
 import os
 import requests
 from bs4 import BeautifulSoup
-from playsound import playsound
-from threading import Thread
 import time
 import sys
 from youtubesearchpython import SearchVideos
 import json
+import playsound
+import threading
+from multiprocessing import Process
 
 downloaded = 0
-state = []
-jobs= []
-
+mypro = Process()
 
 
 def getTime(type):
@@ -41,7 +40,6 @@ def scraping(content):
     return link
 
 def download(link, mp3_name):
-    print("link: ",link)
     doc = requests.get(link)
     with open(f'{mp3_name}.mp3', 'wb') as f:
         f.write(doc.content)
@@ -51,30 +49,11 @@ def download_via_id(id, name):
     downlink = scraping(content)
     download(downlink, name)
 
-def playmusic(path):
-    print("a")
-    playsound(path, True)
-
-def threading(path):
-    return Thread(target=playmusic, args=(path,), name="t")
-
 def searchid(word):
-    search = SearchVideos(word, offset = 1, mode = "json", max_results = 1)
-    raw = search.result()
+    raw = SearchVideos(word, offset = 1, mode = "json", max_results = 1).result()
+    print(raw)
     link = json.loads(raw)["search_result"][0]["link"]
-    print(link)
     link = link[32:]
     return link
-    
-
-'''
-a = threading("muzik.mp3")
-a.daemon = True
-a.start()
-print("hop")
-time.sleep(6)
-a._stop '''
-
-searchid("Enes batur yutup")
 
 

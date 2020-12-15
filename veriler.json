@@ -1,16 +1,16 @@
 {"veriler" :  [
   {"tag":  "selamlama",
-  "patterns" :  ["Merhaba", "Nasılsın", "Ne yapıyorsun", "Selam", "Sa", "Selamun Aleyküm","Naber"],
-    "responses" : ["İyiyim", "sen nasılsın?","İyi, seni sormalı","As", "Aleyküm Selam"],
+  "patterns" :  ["Merhaba", "Nasılsın", "Selam", "Sa", "Selamun Aleyküm","Naber"],
+    "responses" : ["İyiyim", "sen nasılsın?","İyi, seni sormalı", "Aleyküm Selam"],
     "context_set" : ""
   },
   {"tag":  "veda",
-  "patterns" :  ["Görüşürüz", "Hoşça Kal", "İyi günler", "Kapatıyorum", "Ayrılıyorum", "Sağlıcakla"],
+  "patterns" :  ["Görüşürüz", "Hoşça Kal", "Kapatıyorum"],
     "responses" : ["Görüşürüz!", "Sen de hoşça kal","Bir daha görüşmek üzere"],
     "context_set" : ""
   },
   {"tag":  "yas",
-  "patterns" :  ["Kaç yaşındasın", "Yaş kaç", "Ne kadar zamandır yaşıyorsun", "Yaş?"],
+  "patterns" :  ["Kaç yaşındasın", "Yaş kaç", "Yaş?"],
     "responses" : ["Henüz 1 yaşındayım","Şuan 1 yaşındayım","1"],
     "context_set" : ""
   },
@@ -20,7 +20,7 @@
     "context_set" : ""
   },
   {"tag":  "yer",
-  "patterns" :  ["Nerede yaşıyorsun", "Neredesin?", "Yaşadığın yer neresi"],
+  "patterns" :  ["Nerede yaşıyorsun", "Neredesin", "Nerdesin", "Yaşadığın yer neresi"],
     "responses" : ["Ram'inin içinde", "Beni çalıştırdığın sürece senin bilgisayarında","Bilgisayarında"],
     "context_set" : ""
   },
@@ -30,7 +30,7 @@
     "context_set" : ""
   },
   {"tag":  "muzik",
-    "patterns" :  ["Müzik çaldırabilir misin", "Şarkı çaldırabilir misin", "Çaldırmak", "Oynat"],
+    "patterns" :  ["Müzik çaldırabilir misin", "Şarkı çaldırabilir misin", "Müzik çalar mısın", "Şarkı çalar mısın", "Müzik çal"],
       "responses" : ["Eğer müzik çaldırmamı istiyorsan: play {müzikismi} yaz"],
       "context_set" : ""
   },
