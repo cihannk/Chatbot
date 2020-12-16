@@ -2,13 +2,32 @@ from tkinter import *
 import gui as main
 import threading
 import multiprocessing
+import muzikservisi
 
 global EntryBox
 global chat
 
+mainprocesses = []
+musicprocesses = []
+flag = True
+
+def killmusicprocesses():
+    for process in musicprocesses:
+        process.terminate()
+    musicprocesses.clear()
+
 #Chat penceresi
 
+def baslangic_mesaji():
+    res = "Merhaba, Ben CBot. Bana istediğini sorabilirsin.\nProgramdan çıkmak için {quit} yazabilirsin."
+    chat.config(state=NORMAL)
+    chat.insert(END, "Bot: " + res + '\n\n')
+    chat.config(foreground="#442265", font=("Verdana", 12 ))
+    chat.config(state=DISABLED)
+    chat.yview(END)
+
 def send():
+    
     msg = EntryBox.get("1.0",'end-1c').strip()
     EntryBox.delete("0.0",END)
     if msg != '':
@@ -23,9 +42,9 @@ def send():
         chat.yview(END)
 
 def mainfunc():
-
     global EntryBox
     global chat
+    global flag
 
     root = Tk()
     root.title("CBot")
@@ -36,8 +55,6 @@ def mainfunc():
 
     chat = Text(root, height= 17, width= 37)
     chat.config(font =("Courier", 14), state=DISABLED)
-    
-    # chat.insert(END, "Bot: " + "Selam, ben CBot. Bana istediğini sorabilirsin\nKapatmak için quit yazabilirsin" + '\n\n')
 
     scrollbar = Scrollbar(root, command=chat.yview, cursor="heart")
     chat['yscrollcommand'] = scrollbar.set
@@ -48,15 +65,20 @@ def mainfunc():
     #Mesajların yazılacağı alan
     EntryBox = Text(root, bd=0, bg="white",width="31", height="5", font="Arial")
 
-    scrollbar.place(x=376,y=51, height=360, width=24)
-    EntryBox.place(x=5, y=415, height=90, width=280)
+    scrollbar.place(x=376,y=60, height=310, width=24)
+    EntryBox.place(x=10, y=385, height=90, width=280)
     lbl.place(x=0, y=0, width= 400, height=50)
     chat.place(x=0, y=50)
-    buton.place(x=300, y=435, height=45)
+    buton.place(x=300, y=405, height=55)
+
+    if flag == True:
+        baslangic_mesaji()
+        flag == False
 
     root.mainloop()
 
 if __name__ == "__main__":
 
     mainthread = multiprocessing.Process(target=mainfunc, )
+    mainprocesses.append(mainthread)
     mainthread.start()

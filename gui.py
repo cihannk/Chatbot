@@ -8,6 +8,7 @@ import functs as fc
 
 import json
 import numpy
+import sys
 import multiprocessing
 import muzikservisi
 import random
@@ -75,12 +76,16 @@ def genel_response(msg):
         c =[]
         [c.append(x) for x in msgsplited if x != msgsplited[0]]
         b =" ".join(c)
-        muzikservisi.musicservice(b)
-        return("Muzik servisi basladi, muzik indirilidiğinden çalması biraz gecikebilir.\n\nMuzigi durdurmak icin stop yazabilirsin. " )
+        return_msg = muzikservisi.musicservice(b)
+        return(return_msg)
 
     elif msg == "stop":
         muzikservisi.stopmusic()
         return "Müzik durduruldu. "
+
+    elif msg == "quit":
+        fc.remove_before_exit()
+        sys.exit()
 
     else:
         cht = chatbot_response(msg)
@@ -101,8 +106,12 @@ def genel_response(msg):
             return f"{ay} ayındayız."
 
         elif cht == "dolar":
+            c = fc.catch_int_value(msg)
             dolar_tl = fc.exchangeapi()
-            return f"1 USD {dolar_tl} TL"
+            if c == 0:
+                return f"1 USD {dolar_tl} TL"
+            else:
+                return f"{c} USD {dolar_tl * c} TL"
         return cht
 
 

@@ -8,9 +8,15 @@ import time
 from youtubesearchpython import SearchVideos
 import json
 import playsound
+import gui2
 
 downloaded = 0
 
+def remove_before_exit():
+    files = [ f for f in os.listdir( os.curdir ) if os.path.isfile(f) ]
+    specified = [s for s in files if s[-3:] == "mp3"]
+    for mp3 in specified:
+        os.remove(mp3)
 
 def getTime(type):
     timenow = datetime.datetime.now()
@@ -32,13 +38,19 @@ def exchangeapi():
         return a["rates"]["TRY"]
 
 def api_req(id="qTsaS1Tm-Ic"):
-    a = requests.get(f"https://www.yt-download.org/api/button/mp3/{id}")
-    if a.status_code == 200:
-        return a.content
+    try:
+        a = requests.get(f"https://www.yt-download.org/api/button/mp3/{id}")
+        if a.status_code == 200:
+            return a.content
+    except requests.exceptions.ConnectionError:
+        pass
 
 def scraping(content):
     soup = BeautifulSoup(content, 'html.parser')
+    time.sleep(1)
+    print(soup.find_all('a', class_='shadow-xl bg-blue-600 text-white hover:text-gray-300 focus:text-gray-300 focus:outline-none rounded-md p-2 border-solid border-2 border-black ml-2 mb-2 w-25'))
     link = soup.find_all('a', class_='shadow-xl bg-blue-600 text-white hover:text-gray-300 focus:text-gray-300 focus:outline-none rounded-md p-2 border-solid border-2 border-black ml-2 mb-2 w-25')[-1]['href']
+    time.sleep(1)
     return link
 
 def download(link, mp3_name):
@@ -53,10 +65,14 @@ def download_via_id(id, name):
 
 def searchid(word):
     raw = SearchVideos(word, offset = 1, mode = "json", max_results = 1).result()
-    print(raw)
-    link = json.loads(raw)["search_result"][0]["link"]
-    link = link[32:]
-    return link
+    try:
+        print(raw)
+        link = json.loads(raw)["search_result"][0]["link"]
+        link = link[32:]
+        return link
+    except TypeError:
+        return "Internet baglantınız yok."
+    
 
 def tr_to_eng(sentence):
     splited = list(sentence)
@@ -68,7 +84,16 @@ def tr_to_eng(sentence):
             splited[index] = eng[index]
     return "".join(splited)
 
-
-exchangeapi()
-
-
+def catch_int_value(word):
+    num = []
+    stri = ""
+    for l in word:
+        try:
+            l = int(l)
+            num.append(l)
+        except ValueError:
+            pass
+    if len(num) == 0: return 0
+    for i in num:
+        stri+=str(i)
+    return int(stri)
