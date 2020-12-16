@@ -9,6 +9,11 @@
     "responses" : ["Görüşürüz!", "Sen de hoşça kal","Bir daha görüşmek üzere"],
     "context_set" : ""
   },
+  {"tag":  "inventor",
+    "patterns" :  ["Seni kim yarattı", "Seni kim yaptı", "Seni kim üretti", "Nasıl var oldun"],
+      "responses" : ["Beni Cihan Kavuk üretti"],
+      "context_set" : ""
+    },
   {"tag":  "yas",
   "patterns" :  ["Kaç yaşındasın", "Yaş kaç", "Yaş?"],
     "responses" : ["Henüz 1 yaşındayım","Şuan 1 yaşındayım","1"],
@@ -35,9 +40,29 @@
       "context_set" : ""
   },
   {"tag":  "saat",
-    "patterns" :  ["Bugün günlerden ne", "Hangi Aydayız", "Hangi Yıldayız", "Saat kaç", "Şuan Saat kaç", "Tarih nedir", "Saati söyleyebilir misin", "Yılı söyleyebilir misin", "Ayı söyleyebilir misin"],
-      "responses" : ["Bugün günlerden","Ay: ","Yıl: ","Saat: ","Tarihi inceliyorum..."],
+    "patterns" :  ["Saati söyler misin", "Saat kaç", "Zamanı söyler misin", "Saati söylesene"],
+      "responses" : ["saat"],
       "context_set" : ""
-  }
+  },
+  {"tag":  "yıl",
+    "patterns" :  ["Hangi yıldayız", "Yıl nedir"],
+      "responses" : ["yıl"],
+      "context_set" : ""
+  },
+  {"tag":  "ay",
+    "patterns" :  ["Hangi aydayız", "Ay nedir"],
+      "responses" : ["ay"],
+      "context_set" : ""
+  },
+  {"tag":  "gun",
+    "patterns" :  ["Hangi gündeyiz", "Bugün günlerden ne"],
+      "responses" : ["gün"],
+      "context_set" : ""
+  },
+  {"tag":  "dolar",
+    "patterns" :  ["Dolar kaç tl", "Bir dolar kaç türk lirası", "Dolar fiyatını söyleyebilir misin"],
+      "responses" : ["dolar"],
+      "context_set" : ""
+    }
 
 ]}

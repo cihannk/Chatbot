@@ -5,15 +5,11 @@ import os
 import requests
 from bs4 import BeautifulSoup
 import time
-import sys
 from youtubesearchpython import SearchVideos
 import json
 import playsound
-import threading
-from multiprocessing import Process
 
 downloaded = 0
-mypro = Process()
 
 
 def getTime(type):
@@ -28,6 +24,12 @@ def getTime(type):
     elif type == "day":
         return timenow.strftime("%A")
 
+def exchangeapi():
+    a = requests.get("https://api.exchangeratesapi.io/latest?base=USD")
+    if a.status_code == 200:
+        print("basarılı")
+        a = json.loads(a.content)
+        return a["rates"]["TRY"]
 
 def api_req(id="qTsaS1Tm-Ic"):
     a = requests.get(f"https://www.yt-download.org/api/button/mp3/{id}")
@@ -55,5 +57,18 @@ def searchid(word):
     link = json.loads(raw)["search_result"][0]["link"]
     link = link[32:]
     return link
+
+def tr_to_eng(sentence):
+    splited = list(sentence)
+    tr = ["ş","ı","ö","ğ","ç","ü","Ü","Ç","Ö","İ","Ş"]
+    eng = ["s","i","o","g","c","u","U","C","O","I","S"]
+    for i in splited:
+        if i in tr:
+            index= tr.index(i)
+            splited[index] = eng[index]
+    return "".join(splited)
+
+
+exchangeapi()
 
 

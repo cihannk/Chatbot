@@ -36,6 +36,8 @@ def mainfunc():
 
     chat = Text(root, height= 17, width= 37)
     chat.config(font =("Courier", 14), state=DISABLED)
+    
+    # chat.insert(END, "Bot: " + "Selam, ben CBot. Bana istediğini sorabilirsin\nKapatmak için quit yazabilirsin" + '\n\n')
 
     scrollbar = Scrollbar(root, command=chat.yview, cursor="heart")
     chat['yscrollcommand'] = scrollbar.set

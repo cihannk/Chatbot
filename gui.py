@@ -4,7 +4,7 @@ from keras.models import load_model
 model = load_model("chatbot_model.h5")
 
 #Servisler
-import ozellikler as svc
+import functs as fc
 
 import json
 import numpy
@@ -76,35 +76,35 @@ def genel_response(msg):
         [c.append(x) for x in msgsplited if x != msgsplited[0]]
         b =" ".join(c)
         muzikservisi.musicservice(b)
-        return("Muzik servisi basladi, muzik indirilidiğinden çalması biraz gecikebilir. \nMuzigi durdurmak icin stop yazabilirsin. " )
+        return("Muzik servisi basladi, muzik indirilidiğinden çalması biraz gecikebilir.\n\nMuzigi durdurmak icin stop yazabilirsin. " )
 
     elif msg == "stop":
-        print("stop func icinde")
         muzikservisi.stopmusic()
+        return "Müzik durduruldu. "
+
     else:
         cht = chatbot_response(msg)
+        if cht == "saat":
+            saat = fc.getTime("now")
+            return f"Saat: {saat}"
+
+        elif cht == "gün":
+            gun = fc.getTime("day")
+            return f"Bugün günlerden {gun}."
+        
+        elif cht == "yıl":
+            yil = fc.getTime("year")
+            return f"{yil} yılındayız."
+        
+        elif cht == "ay":
+            ay = fc.getTime("month")
+            return f"{ay} ayındayız."
+
+        elif cht == "dolar":
+            dolar_tl = fc.exchangeapi()
+            return f"1 USD {dolar_tl} TL"
         return cht
 
-'''def Bot():
-    while True:
-        kl = input("Kullanıcı: ")
-        if kl.split()[0] == "play":
-            kl = kl.split()
-            c =[]
-            [c.append(x) for x in kl if x != kl[0]]
-            b =" ".join(c)
-            svc.musicservice(b)
-            print("Muzik servisi basladi, muzik indirilidiğinden çalması biraz gecikebilir.")
-            print("Muzigi durdurmak icin stop yazabilirsin")
-        elif kl == "quit":
-            print("Bot: Seninle konuşmak güzeldi...")
-            time.sleep(1.5)
-            break
-        elif kl == "stop":
-            print("Müzik durduruluyor...")
-        else:
-            cb = chatbot_response(kl)
-            print("Bot: ",cb) '''
 
 
             

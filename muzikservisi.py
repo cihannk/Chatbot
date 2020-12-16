@@ -1,7 +1,6 @@
 from multiprocessing import Process
-import ozellikler
+import functs
 import playsound
-import ozellikler
 
 state = []
 
@@ -11,7 +10,7 @@ def playmusic(path):
 
 def stopmusic():
     state[0].terminate()
-
+    state.clear()
 
 def musicservice(muzikadi):
     mp = Process(target=musicservice2, args=(muzikadi,))
@@ -19,9 +18,9 @@ def musicservice(muzikadi):
     mp.start()
 
 def musicservice2(muzikadi):
-    id = ozellikler.searchid(muzikadi)
+    id = functs.searchid(muzikadi)
     muzikadi = muzikadi.split()
     muzikadi = "".join(muzikadi)
-    ozellikler.download_via_id(id, muzikadi)
+    functs.download_via_id(id, muzikadi)
     path = f"{muzikadi}.mp3"
     playmusic(path)
