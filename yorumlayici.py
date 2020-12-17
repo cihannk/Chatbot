@@ -13,7 +13,7 @@ def genel_response(msg):
         return(return_msg)
 
     elif msg == "stop":
-        muzikservisi.stopmusic()
+        muzikservisi.stopimm()
         return "Müzik durduruldu. "
 
     elif msg == "quit":

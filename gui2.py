@@ -1,5 +1,4 @@
 from tkinter import *
-import threading
 import multiprocessing
 import muzikservisi
 import yorumlayici
@@ -9,10 +8,19 @@ global chat
 
 mainprocesses = []
 musicprocesses = []
-flag = True
 
-isPlaying = False
+flag = True
 isPlaying2 = False
+
+def killspecific(no):
+    name = f"Process-1:{no}"
+    print(name)
+    for i, pr in enumerate(musicprocesses):
+        if pr.name == name:
+            print("silmek sitedigim ",pr.name)
+            pr.terminate()
+            musicprocesses.pop(i)
+            
 
 def killmusicprocesses():
     try:

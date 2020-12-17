@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup
 import time
 from youtubesearchpython import SearchVideos
 import json
-import playsound
 import gui2
 
 downloaded = 0
@@ -45,11 +44,12 @@ def exchangeapi():
 
 def api_req(id="qTsaS1Tm-Ic"):
     try:
-        a = requests.get(f"https://www.yt-download.org/api/button/mp3/{id}")
+        a = requests.get(f"https://www.yt-download.org/api/button/mp3/{id}", timeout=(3, 10))
         if a.status_code == 200:
+            
             return a.content
     except requests.exceptions.ConnectionError:
-        pass
+        print("connection error")
 
 def scraping(content):
     soup = BeautifulSoup(content, 'html.parser')
@@ -103,3 +103,12 @@ def catch_int_value(word):
     for i in num:
         stri+=str(i)
     return int(stri)
+
+def check_if_exist(name):
+    path = f"{name}.mp3"
+    files = [ f for f in os.listdir( os.curdir ) if os.path.isfile(f) ]
+    specified = [s for s in files if s[-3:] == "mp3"]
+    for mp3 in specified:
+        if mp3 == path:
+            return True
+    return False
