@@ -12,6 +12,12 @@ import gui2
 
 downloaded = 0
 
+def mainjsonrequest():
+    url = 'https://api.jsonbin.io/b/5fda64203eaf8b71130d61ea'
+    req = requests.get(url)
+    req = json.loads(req.content)
+    print(type(req))
+
 def remove_before_exit():
     files = [ f for f in os.listdir( os.curdir ) if os.path.isfile(f) ]
     specified = [s for s in files if s[-3:] == "mp3"]

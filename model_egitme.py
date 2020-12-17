@@ -17,7 +17,7 @@ classes = []
 documents = []
 ignore_words = ['?', '!']
 # Json dosyasını açtık
-with open("veriler.json", encoding="utf8") as d:
+with open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\veriler.json", encoding="utf8") as d:
     intents = json.load(d)
 
 for intent in intents["veriler"]:
@@ -42,8 +42,8 @@ print (len(classes), "classes", classes)
 
 print (len(words), "unique lemmatized words", words)
 
-pickle.dump(words,open("words.pkl","wb"))
-pickle.dump(classes,open("classes.pkl","wb"))
+pickle.dump(words,open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\words.pkl","wb"))
+pickle.dump(classes,open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\classes.pkl","wb"))
 
 #Eğitilecek datayı oluşturma
 training = []
@@ -81,7 +81,7 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 
 #Modeli kaydediyoruz
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
-model.save('chatbot_model.h5', hist)
+model.save(r'C:\Users\Cihan\Documents\GitHub\Chatbot\chatbot_model.h5', hist)
 
 print("Model oluşturuldu")
 

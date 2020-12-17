@@ -1,8 +1,8 @@
 from tkinter import *
-import gui as main
 import threading
 import multiprocessing
 import muzikservisi
+import yorumlayici
 
 global EntryBox
 global chat
@@ -11,10 +11,18 @@ mainprocesses = []
 musicprocesses = []
 flag = True
 
+isPlaying = False
+isPlaying2 = False
+
 def killmusicprocesses():
-    for process in musicprocesses:
-        process.terminate()
-    musicprocesses.clear()
+    try:
+        for process in musicprocesses:
+            process.terminate()
+        musicprocesses.clear()
+    except IndexError:
+        pass
+    except AttributeError:
+        pass
 
 #Chat penceresi
 
@@ -35,7 +43,7 @@ def send():
         chat.insert(END, "Sen: " + msg + '\n\n')
         chat.config(foreground="#442265", font=("Verdana", 12 ))
 
-        res = main.genel_response(msg)
+        res = yorumlayici.genel_response(msg)
         chat.insert(END, "Bot: " + res + '\n\n')
 
         chat.config(state=DISABLED)

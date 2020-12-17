@@ -1,27 +1,21 @@
 from keras.models import load_model
 
 #Modelimizi loadlıyoruz
-model = load_model("chatbot_model.h5")
-
-#Servisler
-import functs as fc
+model = load_model(r"C:\Users\Cihan\Documents\GitHub\Chatbot\chatbot_model.h5")
 
 import json
 import numpy
-import sys
 import multiprocessing
-import muzikservisi
 import random
-import tkinter as tk
 import time
 import pickle
 import nltk
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 
-intents = json.loads(open("veriler.json",encoding="utf8").read())
-words = pickle.load(open("words.pkl","rb"))
-classes = pickle.load(open("classes.pkl","rb"))
+intents = json.loads(open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\veriler.json",encoding="utf8").read())
+words = pickle.load(open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\words.pkl","rb"))
+classes = pickle.load(open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\classes.pkl","rb"))
 
 # Girdiğimiz cümleleri parçalara bölmek ve sadeleştirmek için fonksiyon oluşturuyoruz
 
@@ -69,51 +63,6 @@ def chatbot_response(msg):
     res = getResponse(ints, intents)
     print(res, "res", type(res))
     return res
-
-def genel_response(msg):
-    msgsplited = msg.split()
-    if msgsplited[0] == "play":
-        c =[]
-        [c.append(x) for x in msgsplited if x != msgsplited[0]]
-        b =" ".join(c)
-        return_msg = muzikservisi.musicservice(b)
-        return(return_msg)
-
-    elif msg == "stop":
-        muzikservisi.stopmusic()
-        return "Müzik durduruldu. "
-
-    elif msg == "quit":
-        fc.remove_before_exit()
-        sys.exit()
-
-    else:
-        cht = chatbot_response(msg)
-        if cht == "saat":
-            saat = fc.getTime("now")
-            return f"Saat: {saat}"
-
-        elif cht == "gün":
-            gun = fc.getTime("day")
-            return f"Bugün günlerden {gun}."
-        
-        elif cht == "yıl":
-            yil = fc.getTime("year")
-            return f"{yil} yılındayız."
-        
-        elif cht == "ay":
-            ay = fc.getTime("month")
-            return f"{ay} ayındayız."
-
-        elif cht == "dolar":
-            c = fc.catch_int_value(msg)
-            dolar_tl = fc.exchangeapi()
-            if c == 0:
-                return f"1 USD {dolar_tl} TL"
-            else:
-                return f"{c} USD {dolar_tl * c} TL"
-        return cht
-
 
 
             
