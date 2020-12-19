@@ -4,6 +4,7 @@ import muzikservisi
 import yorumlayici
 import send_info
 import datetime
+import socket
 
 global EntryBox
 global chat
@@ -13,6 +14,21 @@ musicprocesses = []
 
 flag = True
 isPlaying2 = False
+internet_connection = None
+
+
+def is_connected():
+    global internet_connection
+    try:
+        sock = socket.create_connection(("www.google.com", 80))
+        if sock is not None:
+            sock.close
+        internet_connection = True
+        return True
+    except OSError:
+        pass
+    internet_connection = False
+    return False
 
 def killspecific(no):
     name = f"Process-1:{no}"
@@ -35,8 +51,8 @@ def killmusicprocesses():
 
 #Chat penceresi
 
-def baslangic_mesaji():
-    res = "Merhaba, Ben CBot. Bana istediğini sorabilirsin.\nProgramdan çıkmak için {quit} yazabilirsin."
+def baslangic_mesaji(msg=""):
+    res = f"{msg}Merhaba, Ben CBot. Bana istediğini sorabilirsin.\nProgramdan çıkmak için quit yazabilirsin."
     chat.config(state=NORMAL)
     chat.insert(END, "Bot: " + res + '\n\n')
     chat.config(foreground="#442265", font=("Verdana", 12 ))
@@ -90,7 +106,14 @@ def mainfunc():
     buton.place(x=300, y=405, height=55)
 
     if flag == True:
-        baslangic_mesaji()
+        global internet_connection
+        isconnected = is_connected()
+        if isconnected == False: 
+            internet_connection = False
+            baslangic_mesaji("Internet baglantınız olmadıgından muzik servisi çalışmayacaktır.\n\n")
+        else:
+            internet_connection = True
+            baslangic_mesaji()
         flag == False
 
     root.mainloop()

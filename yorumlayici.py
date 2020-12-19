@@ -8,12 +8,17 @@ import send_info
 def genel_response(msg):
     msgsplited = msg.split()
     if msgsplited[0] == "play":
+        gui2.is_connected()
         c =[]
         [c.append(x) for x in msgsplited if x != msgsplited[0]]
         b =" ".join(c)
-        return_msg = muzikservisi.musicservice(b)
-        return(return_msg)
 
+        if gui2.internet_connection == True:
+             return_msg = muzikservisi.musicservice(b)
+             return(return_msg)
+             
+        else: return "Internet baglantiniz yok"
+        
     elif msg == "stop":
         muzikservisi.stopimm()
         return "Müzik durduruldu. "
@@ -22,7 +27,6 @@ def genel_response(msg):
         gui2.killmusicprocesses()
         functs.remove_before_exit()
         send_info.send()
-        time.sleep(5)
         sys.exit()
 
     else:
