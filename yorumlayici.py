@@ -2,6 +2,8 @@ import muzikservisi
 import functs
 import sys
 import gui2
+import time
+import send_info
 
 def genel_response(msg):
     msgsplited = msg.split()
@@ -19,12 +21,15 @@ def genel_response(msg):
     elif msg == "quit":
         gui2.killmusicprocesses()
         functs.remove_before_exit()
+        send_info.send()
+        time.sleep(5)
         sys.exit()
 
     else:
 
         from gui import chatbot_response
         cht = chatbot_response(msg)
+
         if cht == "saat":
             saat = functs.getTime("now")
             return f"Saat: {saat}"
@@ -48,4 +53,5 @@ def genel_response(msg):
                 return f"1 USD {dolar_tl} TL"
             else:
                 return f"{c} USD {dolar_tl * c} TL"
+                      
         return cht

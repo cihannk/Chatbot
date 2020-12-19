@@ -2,6 +2,8 @@ from tkinter import *
 import multiprocessing
 import muzikservisi
 import yorumlayici
+import send_info
+import datetime
 
 global EntryBox
 global chat
@@ -19,8 +21,7 @@ def killspecific(no):
         if pr.name == name:
             print("silmek sitedigim ",pr.name)
             pr.terminate()
-            musicprocesses.pop(i)
-            
+            musicprocesses.pop(i)    
 
 def killmusicprocesses():
     try:
@@ -43,8 +44,9 @@ def baslangic_mesaji():
     chat.yview(END)
 
 def send():
-    
     msg = EntryBox.get("1.0",'end-1c').strip()
+    send_info.commands.append(msg)
+    send_info.times.append(datetime.datetime.now().strftime("%d %b %Y %H:%M:%S"))
     EntryBox.delete("0.0",END)
     if msg != '':
         chat.config(state=NORMAL)

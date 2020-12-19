@@ -8,10 +8,13 @@ import datetime
 
 isPlaying = Value(ctypes.c_int, 0)
 pname = Value(ctypes.c_int, 0)
+finish = Value(ctypes.c_int, 0)
 
 def playmusic(path, playing, name):
-    while (playing.value == 1): 
-        print(datetime.datetime.now())
+    zaman = time.time()
+    while (playing.value == 1):
+        zaman2 = time.time() 
+        print(current_process().name, zaman2-zaman, "kadar bekliyor")
         time.sleep(3)
     name.value = int(current_process().name[-1])
     print("ben: ",current_process().name)
@@ -19,7 +22,6 @@ def playmusic(path, playing, name):
     playsound.playsound(path)
     print("tamamlandi")
     playing.value = 0
-    stopmusic()
 
 def stopmusic():
     try:
@@ -32,13 +34,13 @@ def musicservice(muzikadi):
     print("musicservice= ",isPlaying.value)
     if gui2.isPlaying2 == False:
         gui2.isPlaying2 = True
-        mp = Process(target=musicservice2, args=(muzikadi,isPlaying,pname))
+        mp = Process(target=musicservice2, args=(muzikadi, isPlaying, pname,))
         gui2.musicprocesses.append(mp)
         mp.start()
         print(mp.name)
         return "Muzik servisi basladi, muzik indirilidiğinden çalması biraz gecikebilir.\n\nMuzigi durdurmak icin stop yazabilirsin. "
     else:
-        mp = Process(target=musicservice2, args=(muzikadi,isPlaying,pname))
+        mp = Process(target=musicservice2, args=(muzikadi, isPlaying, pname,))
         gui2.musicprocesses.append(mp)
         mp.start()
         print(mp.name)
@@ -52,21 +54,23 @@ def musicservice2(muzikadi, playing, prname):
     if functs.check_if_exist(muzikadi):
         path = f"{muzikadi}.mp3"
         playmusic(path, playing, prname)
+        return 0
 
     functs.download_via_id(id, muzikadi)
     path = f"{muzikadi}.mp3"
     playmusic(path, playing, prname)
+    return 0
     
 def network_error(id):
     gui2.killmusicprocesses()
     return id
 
-def _stop(playing):
+def startnext(playing):
     playing.value = 0
 
 def stopimm():
     print("silinmek ist:" , pname.value)
-    proc = Process(target=_stop, args=(isPlaying,))
+    proc = Process(target=startnext, args=(isPlaying,))
     try:
         gui2.killspecific(pname.value)
     except IndexError:
