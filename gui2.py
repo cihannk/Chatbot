@@ -4,55 +4,18 @@ import muzikservisi
 import yorumlayici
 import send_info
 import datetime
-import socket
+import functs
 
 global EntryBox
 global chat
 
-mainprocesses = []
-musicprocesses = []
-
 flag = True
-isPlaying2 = False
 internet_connection = None
-
-
-def is_connected():
-    global internet_connection
-    try:
-        sock = socket.create_connection(("www.google.com", 80))
-        if sock is not None:
-            sock.close
-        internet_connection = True
-        return True
-    except OSError:
-        pass
-    internet_connection = False
-    return False
-
-def killspecific(no):
-    name = f"Process-1:{no}"
-    print(name)
-    for i, pr in enumerate(musicprocesses):
-        if pr.name == name:
-            print("silmek sitedigim ",pr.name)
-            pr.terminate()
-            musicprocesses.pop(i)    
-
-def killmusicprocesses():
-    try:
-        for process in musicprocesses:
-            process.terminate()
-        musicprocesses.clear()
-    except IndexError:
-        pass
-    except AttributeError:
-        pass
 
 #Chat penceresi
 
 def baslangic_mesaji(msg=""):
-    res = f"{msg}Merhaba, Ben CBot. Bana istediğini sorabilirsin.\nProgramdan çıkmak için quit yazabilirsin."
+    res = f"{msg}Merhaba, Ben CBot. Bana istediğini sorabilirsin.\n\nProgramdan çıkmak için quit yazabilirsin. \n\nKomutları öğrenmek için komutlar yazabilirisin"
     chat.config(state=NORMAL)
     chat.insert(END, "Bot: " + res + '\n\n')
     chat.config(foreground="#442265", font=("Verdana", 12 ))
@@ -75,11 +38,8 @@ def send():
         chat.config(state=DISABLED)
         chat.yview(END)
 
-def mainfunc():
-    global EntryBox
-    global chat
-    global flag
-
+if __name__ == "__main__":
+    multiprocessing.freeze_support()
     root = Tk()
     root.title("CBot")
     root.geometry("400x500")
@@ -106,11 +66,11 @@ def mainfunc():
     buton.place(x=300, y=405, height=55)
 
     if flag == True:
-        global internet_connection
-        isconnected = is_connected()
+        isconnected = functs.is_connected()
+        print(isconnected)
         if isconnected == False: 
             internet_connection = False
-            baslangic_mesaji("Internet baglantınız olmadıgından muzik servisi çalışmayacaktır.\n\n")
+            baslangic_mesaji("Internet baglantınız olmadıgından bazı servisler çalışmayacaktır.\n\n")
         else:
             internet_connection = True
             baslangic_mesaji()
@@ -118,8 +78,3 @@ def mainfunc():
 
     root.mainloop()
 
-if __name__ == "__main__":
-
-    mainthread = multiprocessing.Process(target=mainfunc, )
-    mainprocesses.append(mainthread)
-    mainthread.start()

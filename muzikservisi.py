@@ -2,7 +2,7 @@ from multiprocessing import Process, Value, current_process
 import ctypes
 import functs
 import playsound
-import gui2
+import processes
 import time
 import datetime
 
@@ -25,23 +25,23 @@ def playmusic(path, playing, name):
 
 def stopmusic():
     try:
-        gui2.musicprocesses[0].terminate()
-        gui2.musicprocesses.pop(0)
+        processes.musicprocesses[0].terminate()
+        processes.musicprocesses.pop(0)
     except IndexError:
         pass
 
 def musicservice(muzikadi):
     print("musicservice= ",isPlaying.value)
-    if gui2.isPlaying2 == False:
-        gui2.isPlaying2 = True
+    if processes.isPlaying2 == False:
+        processes.isPlaying2 = True
         mp = Process(target=musicservice2, args=(muzikadi, isPlaying, pname,))
-        gui2.musicprocesses.append(mp)
+        processes.musicprocesses.append(mp)
         mp.start()
         print(mp.name)
         return "Muzik servisi basladi, muzik indirilidiğinden çalması biraz gecikebilir.\n\nMuzigi durdurmak icin stop yazabilirsin. "
     else:
         mp = Process(target=musicservice2, args=(muzikadi, isPlaying, pname,))
-        gui2.musicprocesses.append(mp)
+        processes.musicprocesses.append(mp)
         mp.start()
         print(mp.name)
         return "Şuan şarkı yürütüldüğünden istediğiniz şarkı sıraya eklendi."
@@ -62,7 +62,7 @@ def musicservice2(muzikadi, playing, prname):
     return 0
     
 def network_error(id):
-    gui2.killmusicprocesses()
+    processes.killmusicprocesses()
     return id
 
 def startnext(playing):
@@ -72,7 +72,7 @@ def stopimm():
     print("silinmek ist:" , pname.value)
     proc = Process(target=startnext, args=(isPlaying,))
     try:
-        gui2.killspecific(pname.value)
+        processes.killspecific(pname.value)
     except IndexError:
         pass
     proc.start()

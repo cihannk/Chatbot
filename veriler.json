@@ -30,10 +30,15 @@
     "context_set" : ""
   },
   {"tag":  "ozellikler",
-  "patterns" :  ["Özelliklerin neler", "Ne işe yarıyorsun", "Neden seni çalıştırmalıyım"],
-    "responses" : ["Saati söyleyebilirim, Finans marketlerini söyleyebilirim, Müzik çaldırabilirim"],
+  "patterns" :  ["Özelliklerin neler", "Ne işe yarıyorsun", "Neden seni çalıştırmalıyım", "Özellikler"],
+    "responses" : ["Saati söyleyebilirim, Finans marketlerini söyleyebilirim, Müzik çaldırabilirim\nKomutları öğrenmek istiyorsan komutlar yazabilirsin"],
     "context_set" : ""
   },
+  {"tag":  "commands",
+    "patterns" :  ["commands", "Komutlar", "Komutların neler"],
+      "responses" : ["Komutlarım Şunlar; (Bunlar harici de istediğini sorabilirsin)\n\nplay {müzikadi} (Müzik Servisi)\nA dolar kaç tl (Dolar TL kur dönüştürücü)\nBugün günlerden ne vs. (Tarih Servisi)"],
+      "context_set" : ""
+    },
   {"tag":  "muzik",
     "patterns" :  ["Müzik çaldırabilir misin", "Şarkı çaldırabilir misin", "Müzik çalar mısın", "Şarkı çalar mısın", "Müzik çal"],
       "responses" : ["Eğer müzik çaldırmamı istiyorsan: play {müzikismi} yaz"],

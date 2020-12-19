@@ -1,30 +1,37 @@
 import muzikservisi
 import functs
 import sys
-import gui2
 import time
 import send_info
+import processes
+
+def internet_yok():
+    functs.is_connected()
+    if functs.internet_connection == False:
+        return True
 
 def genel_response(msg):
+
     msgsplited = msg.split()
+
     if msgsplited[0] == "play":
-        gui2.is_connected()
+        functs.is_connected()
         c =[]
         [c.append(x) for x in msgsplited if x != msgsplited[0]]
         b =" ".join(c)
 
-        if gui2.internet_connection == True:
+        if functs.internet_connection == True:
              return_msg = muzikservisi.musicservice(b)
              return(return_msg)
              
-        else: return "Internet baglantiniz yok"
+        else: return "Internet baglantınız yok. Bu servis çalışmayacak."
         
     elif msg == "stop":
         muzikservisi.stopimm()
         return "Müzik durduruldu. "
 
     elif msg == "quit":
-        gui2.killmusicprocesses()
+        processes.killmusicprocesses()
         functs.remove_before_exit()
         send_info.send()
         sys.exit()
@@ -51,11 +58,15 @@ def genel_response(msg):
             return f"{ay} ayındayız."
 
         elif cht == "dolar":
-            c = functs.catch_int_value(msg)
-            dolar_tl = functs.exchangeapi()
-            if c == 0:
-                return f"1 USD {dolar_tl} TL"
+            a = internet_yok()
+            print(a)
+            if a == True: return "Internet baglantınız yok. Bu servis çalışmayacak."
             else:
-                return f"{c} USD {dolar_tl * c} TL"
+                c = functs.catch_int_value(msg)
+                dolar_tl = functs.exchangeapi()
+                if c == 0:
+                    return f"1 USD {dolar_tl} TL"
+                else:
+                    return f"{c} USD {dolar_tl * c} TL"
                       
         return cht

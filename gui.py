@@ -5,7 +5,6 @@ model = load_model(r"C:\Users\Cihan\Documents\GitHub\Chatbot\chatbot_model.h5")
 
 import json
 import numpy
-import multiprocessing
 import random
 import time
 import pickle

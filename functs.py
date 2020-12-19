@@ -7,9 +7,23 @@ from bs4 import BeautifulSoup
 import time
 from youtubesearchpython import SearchVideos
 import json
-import gui2
+import socket
 
 downloaded = 0
+internet_connection = None
+
+def is_connected():
+    global internet_connection
+    try:
+        sock = socket.create_connection(("www.google.com", 80))
+        if sock is not None:
+            sock.close
+        internet_connection = True
+        return True
+    except OSError:
+        pass
+    internet_connection = False
+    return False
 
 def mainjsonrequest():
     url = 'https://api.jsonbin.io/b/5fda64203eaf8b71130d61ea'
@@ -36,11 +50,14 @@ def getTime(type):
         return timenow.strftime("%A")
 
 def exchangeapi():
-    a = requests.get("https://api.exchangeratesapi.io/latest?base=USD")
-    if a.status_code == 200:
-        print("basarılı")
-        a = json.loads(a.content)
-        return a["rates"]["TRY"]
+    try:
+        a = requests.get("https://api.exchangeratesapi.io/latest?base=USD")
+        if a.status_code == 200:
+            print("basarılı")
+            a = json.loads(a.content)
+            return a["rates"]["TRY"]
+    except:
+        return None
 
 def api_req(id="qTsaS1Tm-Ic"):
     try:
