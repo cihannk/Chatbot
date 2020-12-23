@@ -1,17 +1,22 @@
 {"veriler" :  [
   {"tag":  "selamlama",
-  "patterns" :  ["Merhaba", "Nasılsın", "Selam", "Sa", "Selamun Aleyküm","Naber"],
-    "responses" : ["İyiyim", "sen nasılsın?","İyi, seni sormalı", "Aleyküm Selam"],
+  "patterns" :  ["Merhaba", "Selam", "Sa", "Selamun Aleyküm", "Hey"],
+    "responses" : ["Merhaba"],
     "context_set" : ""
   },
+  {"tag":  "halhatır",
+    "patterns" :  ["Nasılsın","Naber" ],
+      "responses" : ["İyiyim, sen nasılsın?", "İyi, seni sormalı"],
+      "context_set" : ""
+    },
   {"tag":  "veda",
   "patterns" :  ["Görüşürüz", "Hoşça Kal", "Kapatıyorum"],
-    "responses" : ["Görüşürüz!", "Sen de hoşça kal","Bir daha görüşmek üzere"],
+    "responses" : ["Görüşürüz!", "Bir daha görüşmek üzere"],
     "context_set" : ""
   },
   {"tag":  "inventor",
     "patterns" :  ["Seni kim yarattı", "Seni kim yaptı", "Seni kim üretti", "Nasıl var oldun"],
-      "responses" : ["Beni Cihan Kavuk üretti"],
+      "responses" : ["Beni nightblack üretti"],
       "context_set" : ""
     },
   {"tag":  "yas",
@@ -20,7 +25,7 @@
     "context_set" : ""
   },
   {"tag":  "isim",
-  "patterns" :  ["İsmin ne", "Adın ne", "Sana ne diye hitap etmeliyim", "İsim?", "Kimle konuşuyorum"],
+  "patterns" :  ["İsmin", "Adın", "Sana diye hitap etmeliyim", "İsim?", "Kimle konuşuyorum"],
     "responses" : ["Benim adım CBot", "Bana CBot diyebilirsin","CBot", "CBot burada!"],
     "context_set" : ""
   },
@@ -31,7 +36,7 @@
   },
   {"tag":  "ozellikler",
   "patterns" :  ["Özelliklerin neler", "Ne işe yarıyorsun", "Neden seni çalıştırmalıyım", "Özellikler"],
-    "responses" : ["Saati söyleyebilirim, Finans marketlerini söyleyebilirim, Müzik çaldırabilirim\nKomutları öğrenmek istiyorsan komutlar yazabilirsin"],
+    "responses" : ["Saati söyleyebilirim, Dolar/TL Dönüştürebilirim, Müzik çaldırabilirim\n\nKomutları öğrenmek istiyorsan komutlar yazabilirsin"],
     "context_set" : ""
   },
   {"tag":  "commands",

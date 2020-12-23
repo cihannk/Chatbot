@@ -98,14 +98,17 @@ def searchid(word):
     
 
 def tr_to_eng(sentence):
-    splited = list(sentence)
-    tr = ["ş","ı","ö","ğ","ç","ü","Ü","Ç","Ö","İ","Ş"]
-    eng = ["s","i","o","g","c","u","U","C","O","I","S"]
-    for i in splited:
-        if i in tr:
-            index= tr.index(i)
-            splited[index] = eng[index]
+    tr = ["ş","ı","ö","ğ","ç","ü"]
+    eng = ["s","i","o","g","c","u"]
+    splited = [x for x in sentence]
+
+    for harf in splited:
+        if harf in tr:
+            idx = splited.index(harf)
+            idx2 = tr.index(harf)
+            splited[idx] = eng[idx2]
     return "".join(splited)
+
 
 def catch_int_value(word):
     num = []

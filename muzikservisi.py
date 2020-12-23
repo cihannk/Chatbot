@@ -47,7 +47,6 @@ def musicservice(muzikadi):
         return "Şuan şarkı yürütüldüğünden istediğiniz şarkı sıraya eklendi."
 
 def musicservice2(muzikadi, playing, prname):
-    id = functs.searchid(muzikadi)
     muzikadi = muzikadi.split()
     muzikadi = "".join(muzikadi)
 
@@ -55,8 +54,12 @@ def musicservice2(muzikadi, playing, prname):
         path = f"{muzikadi}.mp3"
         playmusic(path, playing, prname)
         return 0
-
-    functs.download_via_id(id, muzikadi)
+        
+    id = functs.searchid(muzikadi)
+    try:
+        functs.download_via_id(id, muzikadi)
+    except:
+        return muzikadi
     path = f"{muzikadi}.mp3"
     playmusic(path, playing, prname)
     return 0
