@@ -35,7 +35,7 @@ def returnspecified():
             dusukprobability.first_result = link
             return f"Boyle bir link buldum\n\n{link}\n\n[aç] yazarsan senin için açabilirim."
         except:
-            "Internet baglantın olmadığından google servisi kullanılamıyor."    
+            return "Internet baglantın olmadığından google servisi kullanılamıyor."    
     else:
         category = None
         yesno = 0
@@ -48,6 +48,9 @@ def genel_response(msg):
 
     msgsplited = msg.split()
     if yesnoneccesary == True:
+        if functs.is_connected() != True:
+            yesnoneccesary = False
+            return "Internet baglantın olmadığından google servisi kullanılamıyor."
         word = yes_or_no(msg)
         if word != None:
             return word
@@ -63,7 +66,7 @@ def genel_response(msg):
         birlesik = b.split()
         birlesik = "".join(birlesik)
         b = b.lower()
-        b = functs.tr_to_eng(b)
+        b = functs.tr_to_eng("word", b)
 
         if is_connected == True:
              return_msg = muzikservisi.musicservice(b)
@@ -103,6 +106,7 @@ def genel_response(msg):
 
         elif cht == "gün":
             gun = functs.getTime("day")
+            gun= functs.tr_to_eng("day", gun)
             return f"Bugün günlerden {gun}."
         
         elif cht == "yıl":
@@ -111,6 +115,7 @@ def genel_response(msg):
         
         elif cht == "ay":
             ay = functs.getTime("month")
+            ay= functs.tr_to_eng("month", ay)
             return f"{ay} ayındayız."
 
         elif cht == "dolar":

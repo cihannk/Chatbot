@@ -97,17 +97,30 @@ def searchid(word):
         return "Internet baglantınız yok."
     
 
-def tr_to_eng(sentence):
-    tr = ["ş","ı","ö","ğ","ç","ü"]
-    eng = ["s","i","o","g","c","u"]
-    splited = [x for x in sentence]
+def tr_to_eng(category, sentence):
+    if category == "word":
+        tr = ["ş","ı","ö","ğ","ç","ü"]
+        eng = ["s","i","o","g","c","u"]
+        splited = [x for x in sentence]
 
-    for harf in splited:
-        if harf in tr:
-            idx = splited.index(harf)
-            idx2 = tr.index(harf)
-            splited[idx] = eng[idx2]
-    return "".join(splited)
+        for harf in splited:
+            if harf in tr:
+                idx = splited.index(harf)
+                idx2 = tr.index(harf)
+                splited[idx] = eng[idx2]
+        return "".join(splited)
+
+    elif category == "month":
+        months_eng = "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+        months_tr = "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
+        idx = months_eng.index(sentence)
+        return months_tr[idx]
+
+    elif category == "day":
+        days_eng = "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        days_tr = "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"
+        idx = days_eng.index(sentence)
+        return days_tr[idx]
 
 
 def catch_int_value(word):
