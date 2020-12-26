@@ -10,13 +10,14 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from keras.optimizers import SGD
 import random
+import paths
 
 words=[]
 classes = []
 documents = []
 ignore_words = ['?', '!']
 # Json dosyasını açtık
-with open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\veriler.json", encoding="utf8") as d:
+with open(paths.jsonpath, encoding="utf8") as d:
     intents = json.load(d)
 
 for intent in intents["veriler"]:

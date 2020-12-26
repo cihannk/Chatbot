@@ -7,6 +7,7 @@ import functs
 import send_info
 import sys
 import processes
+import os
 
 global EntryBox
 global chat
@@ -18,13 +19,14 @@ internet_connection = None
 def on_closing():
     processes.killmusicprocesses()
     functs.remove_before_exit()
-    send_info.send()
+    if yorumlayici.bilgigonder:
+        send_info.send()
     sys.exit()
 
 #Chat penceresi
 
 def baslangic_mesaji(msg=""):
-    res = f"{msg}Merhaba, Ben CBot. Bana istediğini sorabilirsin.\n\nProgramdan çıkmak için quit yazabilirsin. \n\nKomutları öğrenmek için komutlar yazabilirisin"
+    res = f"{msg}Merhaba, Ben CBot. Bana istediğini sorabilirsin.\n\nProgramdan çıkmak için quit yazabilirsin.\n\nKomutları öğrenmek için komutlar yazabilirisin.\n\nChatbot'a yazdığın her şey log olarak kaydedilip sistemin geliştirlmesi için kullanılacak.\n\nEğer istemiyorsan 'bilgigonderme' yazabilirsin."
     chat.config(state=tkinter.NORMAL)
     chat.insert(tkinter.END, "Bot: " + res + '\n\n')
     chat.config(foreground="#442265", font=("Verdana", 12 ))
@@ -49,7 +51,8 @@ def send():
 
 #Projenin main bölümü
 if __name__ == "__main__":
-
+    files = [ f for f in os.listdir( os.curdir ) if os.path.isfile(f) ]
+    
     #Pencereyi oluşturuyorum
     multiprocessing.freeze_support()
     root = tkinter.Tk()

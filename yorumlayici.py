@@ -6,6 +6,7 @@ import send_info
 import processes
 import dusukprobability
 
+bilgigonder = True
 quest = None
 yesno = 0 #0-Boşta, 1-Onayladı, 2-Onaylamadı
 yesnoneccesary = False
@@ -45,6 +46,7 @@ def returnspecified():
 def genel_response(msg):
     global yesnoneccesary
     global category
+    global bilgigonder
 
     msgsplited = msg.split()
     if yesnoneccesary == True:
@@ -71,7 +73,7 @@ def genel_response(msg):
         if is_connected == True:
              return_msg = muzikservisi.musicservice(b)
              if return_msg == 1:
-                 return "Oynatmaya çalıştığınız şarkı telifli olabilir.\n lütfen farklı isimle tekrar deneyin."
+                 return "1"
              return(return_msg)
         else:
             if functs.check_if_exist(birlesik):
@@ -84,6 +86,10 @@ def genel_response(msg):
         muzikservisi.stopimm()
         return "Müzik durduruldu. "
 
+    elif msg == "bilgigonderme":
+        bilgigonder = False
+        return "Değişiklikleriniz onaylandı."
+
     elif msg == "aç":
         dusukprobability.open_link()
         return "açılıyor..."
@@ -91,7 +97,8 @@ def genel_response(msg):
     elif msg == "quit":
         processes.killmusicprocesses()
         functs.remove_before_exit()
-        send_info.send()
+        if bilgigonder:
+            send_info.send()
         sys.exit()
 
     else:

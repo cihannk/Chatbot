@@ -1,7 +1,8 @@
 from keras.models import load_model
+import paths
 
 #Modelimizi loadlıyoruz
-model = load_model(r"C:\Users\Cihan\Documents\GitHub\Chatbot\chatbot_model.h5")
+model = load_model(paths.modelpath)
 
 import json
 import numpy
@@ -14,11 +15,11 @@ from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 
 #Jsondaki her sentence
-intents = json.loads(open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\veriler.json",encoding="utf8").read())
+intents = json.loads(open(paths.jsonpath,encoding="utf8").read())
 #Jsondaki her farklı unique kelimeler
-words = pickle.load(open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\words.pkl","rb"))
+words = pickle.load(open(paths.wordspath,"rb"))
 #Her grup ismi
-classes = pickle.load(open(r"C:\Users\Cihan\Documents\GitHub\Chatbot\classes.pkl","rb"))
+classes = pickle.load(open(paths.classespath,"rb"))
 
 sentencee = None
 
