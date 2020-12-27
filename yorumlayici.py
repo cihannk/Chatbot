@@ -128,7 +128,7 @@ def genel_response(msg):
         elif cht == "dolar":
             a = functs.is_connected()
             print(a)
-            if a == True: return "Internet baglantınız yok. Bu servis çalışmayacak."
+            if a == False: return "Internet baglantınız yok. Bu servis çalışmayacak."
             c = functs.catch_int_value(msg)
             dolar_tl = functs.exchangeapi()
             if c == 0:
